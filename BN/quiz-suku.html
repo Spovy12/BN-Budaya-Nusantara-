@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BN — Quiz Suku-Suku Indonesia Lengkap</title>
+  <link rel="stylesheet" href="D:\BN[1]\BN\map.css">  
+  <style>
+    :root{--text:#fff;--muted:rgba(255,255,255,0.8);--accent:#FF6B35;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;background:#000;}
+    .site-header{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;padding:0 28px;background:#000;z-index:9999;box-shadow:0 2px 6px rgba(0,0,0,0.4);border-bottom:1px solid rgba(255,255,255,0.03);}
+    .header-inner{max-width:1400px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .brand img.logo{max-height:40px;}
+    .brand .brand-title{font-weight:700;font-size:20px;letter-spacing:1px;color:var(--text);text-shadow:0 1px 3px rgba(0,0,0,0.4);}
+    .main-nav{display:flex;gap:40px;align-items:center;justify-content:center;flex:1;margin-top:8px;}
+    .main-nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:15px;padding:6px 0;transition:color 0.2s ease;}
+    .main-nav a:hover,.main-nav a.active{color:var(--accent);}
+    .actions{display:flex;align-items:center;gap:20px;}
+    .btn-back{padding:8px 16px;background:rgba(255,255,255,0.1);color:var(--text);border:1px solid rgba(255,255,255,0.2);border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;transition:all 0.3s ease;}
+    .btn-back:hover{background:rgba(255,255,255,0.15);}
+    .quiz-hero{position:relative;width:100%;height:50vh;padding-top:64px;background:linear-gradient(135deg,#0a0a0a 0%,#1a1a1a 100%);display:flex;align-items:center;justify-content:center;text-align:center;}
+    .quiz-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(255,107,53,0.15) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(255,107,53,0.1) 0%,transparent 50%);}
+    .quiz-hero-content{position:relative;z-index:10;max-width:600px;padding:0 40px;}
+    .quiz-hero-content h1{font-size:48px;font-weight:700;margin:0 0 20px;color:var(--text);text-shadow:0 2px 6px rgba(0,0,0,0.5);}
+    .quiz-hero-content p{font-size:16px;color:var(--muted);margin:0;line-height:1.6;}
+    .quiz-container{max-width:900px;margin:80px auto;padding:0 20px;}
+    .quiz-section{background:linear-gradient(135deg,rgba(255,107,53,0.05) 0%,rgba(255,107,53,0.02) 100%);border:1px solid rgba(255,107,53,0.2);border-radius:12px;padding:40px;margin-bottom:40px;box-shadow:0 8px 32px rgba(0,0,0,0.3);}
+    .quiz-section h2{font-size:28px;font-weight:700;color:var(--text);margin:0 0 30px;padding-bottom:15px;border-bottom:2px solid var(--accent);display:inline-block;}
+    .quiz-questions{display:flex;flex-direction:column;gap:30px;}
+    .question-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:24px;transition:all 0.3s ease;}
+    .question-item:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,107,53,0.3);transform:translateX(4px);}
+    .question-text{font-size:16px;font-weight:600;color:var(--text);margin:0 0 18px;display:flex;align-items:center;gap:12px;}
+    .question-number{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;background:var(--accent);border-radius:50%;font-weight:700;font-size:14px;}
+    .options{display:flex;flex-direction:column;gap:12px;margin-left:44px;}
+    .option-label{display:flex;align-items:center;gap:12px;cursor:pointer;padding:10px 12px;border-radius:6px;transition:all 0.2s ease;}
+    .option-label:hover{background:rgba(255,107,53,0.1);}
+    .option-label input[type="radio"]{cursor:pointer;accent-color:var(--accent);width:18px;height:18px;}
+    .option-text{color:var(--muted);font-size:15px;font-weight:500;}
+    .option-label input[type="radio"]:checked + .option-text{color:var(--text);font-weight:600;}
+    .quiz-actions{display:flex;gap:16px;justify-content:center;margin-top:50px;flex-wrap:wrap;}
+    .btn{padding:14px 32px;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.3s ease;}
+    .btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 12px rgba(255,107,53,0.3);}
+    .btn-primary:hover{background:#FF5A1F;transform:translateY(-2px);}
+    .btn-secondary{background:rgba(255,255,255,0.1);color:var(--text);border:1px solid rgba(255,255,255,0.2);}
+    .btn-secondary:hover{background:rgba(255,255,255,0.15);}
+    .results-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:11000;align-items:center;justify-content:center;padding:24px;}
+    .results-modal.visible{display:flex;}
+    .results-content{background:linear-gradient(135deg,#1a1a1a 0%,#0f0f0f 100%);border:1px solid rgba(255,107,53,0.3);border-radius:12px;padding:40px;max-width:500px;text-align:center;}
+    .results-content h2{font-size:32px;font-weight:700;color:var(--text);margin:0 0 20px;}
+    .score-display{font-size:64px;font-weight:700;color:var(--accent);margin:20px 0;}
+    .results-message{font-size:16px;color:var(--muted);margin:20px 0 30px;}
+    .results-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="action.png" alt="Logo" class="logo" />
+        <div class="brand-title">NUSANTARA</div>
+      </div>
+      <nav class="main-nav">
+        <a href="Quiz.html" class="active">Quiz</a>
+        <a href="index.html">Beranda</a>
+        <a href="pengenalan budaya.html">Pengenalan Budaya</a>
+      </nav>
+      <div class="actions">
+        <a href="Quiz.html" class="btn-back">← Kembali ke Quiz Utama</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="quiz-hero">
+    <div class="quiz-hero-content">
+      <h1>Quiz Suku-Suku Indonesia</h1>
+      <p>20 Soal Lengkap tentang Keberagaman Suku di Nusantara</p>
+    </div>
+  </section>
+
+  <main>
+    <div class="quiz-container">
+      <form class="quiz-section" id="quizForm">
+        <h2>Suku-Suku Indonesia - Soal Lengkap</h2>
+        <div class="quiz-questions">
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">1</span>Suku apa yang terkenal dengan tradisi "Tau Tau" (patung kayu)?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q1" value="a"><span class="option-text">A. Suku Toraja</span></label>
+              <label class="option-label"><input type="radio" name="q1" value="b"><span class="option-text">B. Suku Batak</span></label>
+              <label class="option-label"><input type="radio" name="q1" value="c"><span class="option-text">C. Suku Dayak</span></label>
+              <label class="option-label"><input type="radio" name="q1" value="d"><span class="option-text">D. Suku Bugis</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">2</span>Suku mana yang mayoritas mendiami Pulau Sulawesi?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q2" value="a"><span class="option-text">A. Suku Minangkabau</span></label>
+              <label class="option-label"><input type="radio" name="q2" value="b"><span class="option-text">B. Suku Bugis dan Makassar</span></label>
+              <label class="option-label"><input type="radio" name="q2" value="c"><span class="option-text">C. Suku Madura</span></label>
+              <label class="option-label"><input type="radio" name="q2" value="d"><span class="option-text">D. Suku Sunda</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">3</span>Suku Baduy dikenal dengan tradisi hidup sederhana dan tinggal di mana?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q3" value="a"><span class="option-text">A. Pegunungan Bandung, Jawa Barat</span></label>
+              <label class="option-label"><input type="radio" name="q3" value="b"><span class="option-text">B. Hutan Kalimantan</span></label>
+              <label class="option-label"><input type="radio" name="q3" value="c"><span class="option-text">C. Kepulauan Riau</span></label>
+              <label class="option-label"><input type="radio" name="q3" value="d"><span class="option-text">D. Pesisir Aceh</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">4</span>Suku apa yang dikenal sebagai "pedagang laut" dan menyebar ke berbagai daerah?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q4" value="a"><span class="option-text">A. Suku Bugis</span></label>
+              <label class="option-label"><input type="radio" name="q4" value="b"><span class="option-text">B. Suku Banjarese</span></label>
+              <label class="option-label"><input type="radio" name="q4" value="c"><span class="option-text">C. Suku Madura</span></label>
+              <label class="option-label"><input type="radio" name="q4" value="d"><span class="option-text">D. Suku Batak</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">5</span>Suku Dayak berasal dari pulau?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q5" value="a"><span class="option-text">A. Kalimantan</span></label>
+              <label class="option-label"><input type="radio" name="q5" value="b"><span class="option-text">B. Sumatra</span></label>
+              <label class="option-label"><input type="radio" name="q5" value="c"><span class="option-text">C. Sulawesi</span></label>
+              <label class="option-label"><input type="radio" name="q5" value="d"><span class="option-text">D. Papua</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">6</span>Suku Asmat terkenal dengan seni ukir dan berasal dari?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q6" value="a"><span class="option-text">A. Papua</span></label>
+              <label class="option-label"><input type="radio" name="q6" value="b"><span class="option-text">B. Maluku</span></label>
+              <label class="option-label"><input type="radio" name="q6" value="c"><span class="option-text">C. NTT</span></label>
+              <label class="option-label"><input type="radio" name="q6" value="d"><span class="option-text">D. Sulawesi</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">7</span>Suku Minangkabau menganut sistem kekerabatan?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q7" value="a"><span class="option-text">A. Matrilineal (garis ibu)</span></label>
+              <label class="option-label"><input type="radio" name="q7" value="b"><span class="option-text">B. Patrilineal (garis ayah)</span></label>
+              <label class="option-label"><input type="radio" name="q7" value="c"><span class="option-text">C. Bilateral</span></label>
+              <label class="option-label"><input type="radio" name="q7" value="d"><span class="option-text">D. Tidak ada sistem</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">8</span>Suku Batak terbagi menjadi beberapa sub-suku, salah satunya adalah?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q8" value="a"><span class="option-text">A. Batak Toba</span></label>
+              <label class="option-label"><input type="radio" name="q8" value="b"><span class="option-text">B. Batak Karo</span></label>
+              <label class="option-label"><input type="radio" name="q8" value="c"><span class="option-text">C. Batak Mandailing</span></label>
+              <label class="option-label"><input type="radio" name="q8" value="d"><span class="option-text">D. Semua benar</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">9</span>Suku Sunda mayoritas tinggal di provinsi?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q9" value="a"><span class="option-text">A. Jawa Barat</span></label>
+              <label class="option-label"><input type="radio" name="q9" value="b"><span class="option-text">B. Jawa Tengah</span></label>
+              <label class="option-label"><input type="radio" name="q9" value="c"><span class="option-text">C. Jawa Timur</span></label>
+              <label class="option-label"><input type="radio" name="q9" value="d"><span class="option-text">D. Banten</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">10</span>Suku Betawi adalah suku asli dari?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q10" value="a"><span class="option-text">A. Jakarta</span></label>
+              <label class="option-label"><input type="radio" name="q10" value="b"><span class="option-text">B. Bandung</span></label>
+              <label class="option-label"><input type="radio" name="q10" value="c"><span class="option-text">C. Bogor</span></label>
+              <label class="option-label"><input type="radio" name="q10" value="d"><span class="option-text">D. Cirebon</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">11</span>Suku Sasak berasal dari pulau?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q11" value="a"><span class="option-text">A. Lombok</span></label>
+              <label class="option-label"><input type="radio" name="q11" value="b"><span class="option-text">B. Bali</span></label>
+              <label class="option-label"><input type="radio" name="q11" value="c"><span class="option-text">C. Sumbawa</span></label>
+              <label class="option-label"><input type="radio" name="q11" value="d"><span class="option-text">D. Flores</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">12</span>Suku Dani terkenal dengan pakaian tradisional "Koteka" dan berasal dari?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q12" value="a"><span class="option-text">A. Papua (Pegunungan Jayawijaya)</span></label>
+              <label class="option-label"><input type="radio" name="q12" value="b"><span class="option-text">B. Maluku</span></label>
+              <label class="option-label"><input type="radio" name="q12" value="c"><span class="option-text">C. NTT</span></label>
+              <label class="option-label"><input type="radio" name="q12" value="d"><span class="option-text">D. Sulawesi</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">13</span>Suku Minahasa berasal dari provinsi?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q13" value="a"><span class="option-text">A. Sulawesi Utara</span></label>
+              <label class="option-label"><input type="radio" name="q13" value="b"><span class="option-text">B. Sulawesi Selatan</span></label>
+              <label class="option-label"><input type="radio" name="q13" value="c"><span class="option-text">C. Sulawesi Tengah</span></label>
+              <label class="option-label"><input type="radio" name="q13" value="d"><span class="option-text">D. Gorontalo</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">14</span>Suku Aceh terkenal dengan tradisi?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q14" value="a"><span class="option-text">A. Tari Saman</span></label>
+              <label class="option-label"><input type="radio" name="q14" value="b"><span class="option-text">B. Peusijuek (upacara adat)</span></label>
+              <label class="option-label"><input type="radio" name="q14" value="c"><span class="option-text">C. Kopi Gayo</span></label>
+              <label class="option-label"><input type="radio" name="q14" value="d"><span class="option-text">D. Semua benar</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">15</span>Suku Madura terkenal dengan tradisi?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q15" value="a"><span class="option-text">A. Karapan Sapi</span></label>
+              <label class="option-label"><input type="radio" name="q15" value="b"><span class="option-text">B. Tari Topeng</span></label>
+              <label class="option-label"><input type="radio" name="q15" value="c"><span class="option-text">C. Batik Madura</span></label>
+              <label class="option-label"><input type="radio" name="q15" value="d"><span class="option-text">D. Semua benar</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">16</span>Suku Banjar berasal dari provinsi?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q16" value="a"><span class="option-text">A. Kalimantan Selatan</span></label>
+              <label class="option-label"><input type="radio" name="q16" value="b"><span class="option-text">B. Kalimantan Timur</span></label>
+              <label class="option-label"><input type="radio" name="q16" value="c"><span class="option-text">C. Kalimantan Tengah</span></label>
+              <label class="option-label"><input type="radio" name="q16" value="d"><span class="option-text">D. Kalimantan Barat</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">17</span>Suku Nias terkenal dengan tradisi?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q17" value="a"><span class="option-text">A. Lompat Batu (Fahombo)</span></label>
+              <label class="option-label"><input type="radio" name="q17" value="b"><span class="option-text">B. Tari Perang</span></label>
+              <label class="option-label"><input type="radio" name="q17" value="c"><span class="option-text">C. Rumah adat dengan arsitektur unik</span></label>
+              <label class="option-label"><input type="radio" name="q17" value="d"><span class="option-text">D. Semua benar</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">18</span>Suku Bali mayoritas menganut agama?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q18" value="a"><span class="option-text">A. Hindu</span></label>
+              <label class="option-label"><input type="radio" name="q18" value="b"><span class="option-text">B. Buddha</span></label>
+              <label class="option-label"><input type="radio" name="q18" value="c"><span class="option-text">C. Islam</span></label>
+              <label class="option-label"><input type="radio" name="q18" value="d"><span class="option-text">D. Kristen</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">19</span>Suku Tengger tinggal di sekitar gunung?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q19" value="a"><span class="option-text">A. Gunung Bromo</span></label>
+              <label class="option-label"><input type="radio" name="q19" value="b"><span class="option-text">B. Gunung Semeru</span></label>
+              <label class="option-label"><input type="radio" name="q19" value="c"><span class="option-text">C. Gunung Merapi</span></label>
+              <label class="option-label"><input type="radio" name="q19" value="d"><span class="option-text">D. Gunung Rinjani</span></label>
+            </div>
+          </div>
+          <div class="question-item">
+            <div class="question-text"><span class="question-number">20</span>Suku Mentawai berasal dari kepulauan di lepas pantai?</div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q20" value="a"><span class="option-text">A. Sumatra Barat</span></label>
+              <label class="option-label"><input type="radio" name="q20" value="b"><span class="option-text">B. Sumatra Utara</span></label>
+              <label class="option-label"><input type="radio" name="q20" value="c"><span class="option-text">C. Lampung</span></label>
+              <label class="option-label"><input type="radio" name="q20" value="d"><span class="option-text">D. Bengkulu</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="quiz-actions">
+          <button type="button" class="btn btn-primary" id="submitBtn">Kirim Jawaban</button>
+          <button type="button" class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div class="results-modal" id="resultsModal">
+    <div class="results-content">
+      <h2>Hasil Quiz Anda</h2>
+      <div class="score-display" id="scoreDisplay">0/20</div>
+      <div class="results-message" id="resultsMessage"></div>
+      <div class="results-actions">
+        <button type="button" class="btn btn-primary" id="retryBtn">Coba Lagi</button>
+        <button type="button" class="btn btn-secondary" id="homeBtn">Kembali ke Quiz Utama</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const correctAnswers={q1:'a',q2:'b',q3:'a',q4:'a',q5:'a',q6:'a',q7:'a',q8:'d',q9:'a',q10:'a',q11:'a',q12:'a',q13:'a',q14:'d',q15:'d',q16:'a',q17:'d',q18:'a',q19:'a',q20:'a'};
+    const resultMessages={excellent:"🎉 Luar Biasa! Anda sangat memahami keberagaman suku di Indonesia!",great:"👏 Sangat Bagus! Pengetahuan Anda tentang suku-suku Indonesia mendalam.",good:"😊 Bagus! Anda memiliki pemahaman yang baik.",fair:"📚 Cukup! Terus pelajari lebih lanjut.",needs_improvement:"💪 Jangan menyerah! Pelajari lebih lanjut tentang suku-suku Indonesia."};
+    function getResultMessage(score){const percentage=(score/20)*100;if(percentage===100)return resultMessages.excellent;if(percentage>=80)return resultMessages.great;if(percentage>=60)return resultMessages.good;if(percentage>=40)return resultMessages.fair;return resultMessages.needs_improvement;}
+    document.getElementById('submitBtn').addEventListener('click',()=>{let score=0;for(let i=1;i<=20;i++){const questionName='q'+i;const selectedAnswer=document.querySelector(`input[name="${questionName}"]:checked`);if(selectedAnswer&&selectedAnswer.value===correctAnswers[questionName]){score++;}}document.getElementById('scoreDisplay').textContent=`${score}/20`;document.getElementById('resultsMessage').textContent=getResultMessage(score);document.getElementById('resultsModal').classList.add('visible');document.body.style.overflow='hidden';});
+    document.getElementById('resetBtn').addEventListener('click',()=>{document.getElementById('quizForm').reset();window.scrollTo(0,0);});
+    document.getElementById('retryBtn').addEventListener('click',()=>{document.getElementById('quizForm').reset();document.getElementById('resultsModal').classList.remove('visible');document.body.style.overflow='';window.scrollTo(0,0);});
+    document.getElementById('homeBtn').addEventListener('click',()=>{window.location.href='Quiz.html';});

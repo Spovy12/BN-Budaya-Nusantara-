@@ -1,0 +1,2770 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BN — Quiz Budaya & Geografi Indonesia</title>
+
+  <link rel="stylesheet" href="D:\BN[1]\BN\map.css">  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  
+  <style>
+    :root{
+      --text: #fff;
+      --muted: rgba(255,255,255,0.8);
+      --accent: #FF6B35;
+      --accent-light: rgba(255, 107, 53, 0.1);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, "Segoe UI", Roboto, Arial, sans-serif;background:#000;}
+
+    /* Header */
+    .site-header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      height:64px;
+      display:flex;
+      align-items:center;
+      padding:0 28px;
+      background:#000;
+      z-index:9999;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: none;
+      overflow:hidden;
+    }
+
+    .header-inner{
+      max-width:1400px;
+      margin:0 auto;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .brand img.logo{
+      max-height:40px;
+    }
+    .brand .brand-title{
+      font-weight:700;
+      font-size:20px;
+      letter-spacing:1px;
+      color:var(--text);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    .main-nav{
+      display:flex;
+      gap:40px;
+      align-items:center;
+      justify-content:center;
+      flex:1;
+      margin-top:8px;
+    }
+    .main-nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:500;
+      font-size:15px;
+      padding:6px 0;
+      white-space:nowrap;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      transition:color 0.2s ease;
+    }
+    .main-nav a:hover, .main-nav a.active{
+      color:var(--accent);
+    }
+
+    .quiz-nav{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-top:16px;
+    }
+    .quiz-row{
+      display:flex;
+      gap:40px;
+      justify-content:center;
+      align-items:center;
+    }
+    .quiz-nav a{
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:500;
+      font-size:10px;
+      padding:6px 0;
+      white-space:nowrap;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      transition:color 0.2s ease;
+    }
+    .quiz-nav a:hover{
+      color:var(--accent);
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      flex-shrink:0;
+    }
+
+    .lang-selector{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border:1px solid rgba(255,255,255,0.3);
+      border-radius:20px;
+      background:rgba(255,255,255,0.08);
+      color:var(--text);
+      font-weight:500;
+      font-size:13px;
+      cursor:pointer;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+    .lang-selector:hover{
+      background:rgba(255,255,255,0.12);
+    }
+
+    .search-container{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .search-input{
+      display:inline-block;
+      width:0;
+      padding:0;
+      border:1px solid rgba(255,255,255,0.3);
+      border-radius:24px;
+      font-size:14px;
+      outline:none;
+      background:rgba(255,255,255,0.12);
+      color:var(--text);
+      opacity:0;
+      transition:width 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
+      white-space:nowrap;
+      overflow:hidden;
+    }
+
+    .search-input.active{
+      width:220px;
+      padding:10px 16px;
+      opacity:1;
+    }
+
+    .search-input:focus{
+      border-color:rgba(255,255,255,0.5);
+      background:rgba(255,255,255,0.16);
+      box-shadow:inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .search-input::placeholder{
+      color:rgba(255,255,255,0.5);
+    }
+
+    .search-btn{
+      width:44px;
+      height:44px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,0.3);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,0.08);
+      color:var(--text);
+      cursor:pointer;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      transition: all 0.2s ease;
+    }
+    .search-btn:hover{
+      background:rgba(255,255,255,0.12);
+    }
+
+    /* Quiz Hero Section */
+    .quiz-hero{
+      position:relative;
+      width:100%;
+      height:60vh;
+      overflow:hidden;
+      padding-top:64px;
+      background:linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .quiz-hero::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+      pointer-events:none;
+    }
+
+    .quiz-hero-content{
+      position:relative;
+      z-index:10;
+      max-width:600px;
+      padding:0 40px;
+    }
+
+    .quiz-hero-content h1{
+      font-size:56px;
+      font-weight:700;
+      margin:0 0 20px;
+      color:var(--text);
+      text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      letter-spacing:1px;
+    }
+
+    .quiz-hero-content p{
+      font-size:18px;
+      color:var(--muted);
+      margin:0;
+      line-height:1.6;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    /* Quiz Container */
+    .quiz-container{
+      max-width:900px;
+      margin:80px auto;
+      padding:0 20px;
+    }
+
+    /* Quiz Section */
+    .quiz-section{
+      background:linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(255, 107, 53, 0.02) 100%);
+      border:1px solid rgba(255, 107, 53, 0.2);
+      border-radius:12px;
+      padding:40px;
+      margin-bottom:40px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .quiz-section h2{
+      font-size:28px;
+      font-weight:700;
+      color:var(--text);
+      margin:0 0 30px;
+      padding-bottom:15px;
+      border-bottom:2px solid var(--accent);
+      display:inline-block;
+    }
+
+    .quiz-questions{
+      display:flex;
+      flex-direction:column;
+      gap:30px;
+    }
+
+    .question-item{
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:8px;
+      padding:24px;
+      transition: all 0.3s ease;
+    }
+
+    .question-item:hover{
+      background:rgba(255,255,255,0.05);
+      border-color:rgba(255, 107, 53, 0.3);
+      transform: translateX(4px);
+    }
+
+    .question-text{
+      font-size:16px;
+      font-weight:600;
+      color:var(--text);
+      margin:0 0 18px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .question-number{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:32px;
+      height:32px;
+      background:var(--accent);
+      border-radius:50%;
+      font-weight:700;
+      flex-shrink:0;
+      font-size:14px;
+    }
+
+    .options{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      margin-left:44px;
+    }
+
+    .option-label{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      cursor:pointer;
+      padding:10px 12px;
+      border-radius:6px;
+      transition: all 0.2s ease;
+    }
+
+    .option-label:hover{
+      background:rgba(255, 107, 53, 0.1);
+    }
+
+    .option-label input[type="radio"]{
+      cursor:pointer;
+      accent-color:var(--accent);
+      width:18px;
+      height:18px;
+      flex-shrink:0;
+    }
+
+    .option-text{
+      color:var(--muted);
+      font-size:15px;
+      font-weight:500;
+    }
+
+    .option-label input[type="radio"]:checked + .option-text{
+      color:var(--text);
+      font-weight:600;
+    }
+
+    /* Quiz Actions */
+    .quiz-actions{
+      display:flex;
+      gap:16px;
+      justify-content:center;
+      margin-top:50px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:14px 32px;
+      border:none;
+      border-radius:8px;
+      font-size:15px;
+      font-weight:600;
+      cursor:pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      white-space:nowrap;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#fff;
+      box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+    }
+
+    .btn-primary:hover{
+      background:#FF5A1F;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.1);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,0.2);
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,0.15);
+      border-color:rgba(255,255,255,0.3);
+    }
+
+    /* Results Modal */
+    .results-modal{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.92);
+      z-index:11000;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      backdrop-filter: blur(4px);
+    }
+
+    .results-modal.visible{
+      display:flex;
+    }
+
+    .results-content{
+      background:linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+      border:1px solid rgba(255, 107, 53, 0.3);
+      border-radius:12px;
+      padding:40px;
+      max-width:500px;
+      text-align:center;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+
+    .results-content h2{
+      font-size:32px;
+      font-weight:700;
+      color:var(--text);
+      margin:0 0 20px;
+    }
+
+    .score-display{
+      font-size:64px;
+      font-weight:700;
+      color:var(--accent);
+      margin:20px 0;
+      text-shadow: 0 2px 6px rgba(255, 107, 53, 0.3);
+    }
+
+    .results-message{
+      font-size:16px;
+      color:var(--muted);
+      margin:20px 0 30px;
+      line-height:1.6;
+    }
+
+    .results-actions{
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    /* Responsive */
+    @media (max-width:768px){
+      .quiz-hero-content h1{
+        font-size:36px;
+      }
+
+      .quiz-section{
+        padding:24px;
+      }
+
+      .quiz-section h2{
+        font-size:22px;
+      }
+
+      .question-text{
+        font-size:15px;
+      }
+
+      .options{
+        margin-left:0;
+      }
+
+      .question-number{
+        width:28px;
+        height:28px;
+        font-size:12px;
+      }
+
+      .option-label{
+        padding:8px 10px;
+      }
+
+      .btn{
+        padding:12px 24px;
+        font-size:14px;
+      }
+
+      .results-content{
+        padding:30px 20px;
+      }
+
+      .score-display{
+        font-size:48px;
+      }
+    }
+
+    @media (max-width:640px){
+      .site-header{
+        height:64px;
+        padding:0 16px;
+      }
+
+      .brand .brand-title{
+        font-size:16px;
+      }
+
+      .main-nav{
+        gap:20px;
+      }
+
+      .main-nav a{
+        font-size:13px;
+      }
+
+      .quiz-hero{
+        height:50vh;
+        padding-top:64px;
+      }
+
+      .quiz-hero-content h1{
+        font-size:28px;
+      }
+
+      .quiz-hero-content p{
+        font-size:14px;
+      }
+
+      .quiz-container{
+        margin:40px auto;
+        padding:0 16px;
+      }
+
+      .quiz-section{
+        padding:20px;
+      }
+
+      .quiz-questions{
+        gap:20px;
+      }
+
+      .question-item{
+        padding:16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="brand">
+        <img src="action.png" alt="Logo" class="logo" />
+        <div class="brand-title">NUSANTARA</div>
+      </div>
+
+      <nav class="main-nav" role="navigation" aria-label="Utama">
+        <a href="Quiz.html" class="active">Quiz</a>
+        <a href="index.html">Beranda</a>
+        <a href="pengenalan budaya.html">Pengenalan Budaya</a>
+      </nav>
+
+      <div class="quiz-nav">
+        <div class="quiz-row">
+          <a href="quiz-budaya.html">Quiz Budaya</a>
+          <a href="quiz-geografi.html">Quiz Geografi</a>
+          <a href="quiz-adat.html">Quiz Adat</a>
+          <a href="quiz-kesenian.html">Quiz Kesenian</a>
+        </div>
+        <div class="quiz-row">
+          <a href="quiz-bahasa.html">Quiz Bahasa</a>
+          <a href="quiz-kuliner.html">Quiz Kuliner</a>
+          <a href="quiz-suku.html">Quiz Suku</a>
+          <a href="quiz-sejarah.html">Quiz Sejarah</a>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="search-container">
+          <input type="text" class="search-input" id="searchInput" placeholder="Pencarian..." aria-label="Cari" />
+          <button class="search-btn" id="searchBtn" aria-label="Cari">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="11" cy="11" r="6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quiz Hero Section -->
+  <section class="quiz-hero">
+    <div class="quiz-hero-content">
+      <h1>Quiz Budaya & Geografi Indonesia</h1>
+      <p>Uji pengetahuanmu tentang kekayaan budaya, suku-suku, dan geografi Nusantara</p>
+    </div>
+  </section>
+
+  <main>
+    <!-- Quiz Container -->
+    <div class="quiz-container">
+      <!-- Quiz Section 1: Budaya Indonesia -->
+      <form class="quiz-section" id="quizForm">
+        <h2>Budaya Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 1 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">1</span>
+              Tari tradisional mana yang berasal dari Bali?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q1" value="a">
+                <span class="option-text">A. Tari Pendet</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="b">
+                <span class="option-text">B. Tari Jaipong</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="c">
+                <span class="option-text">C. Tari Seudati</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q1" value="d">
+                <span class="option-text">D. Tari Poco-poco</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 2 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">2</span>
+              Batik adalah warisan budaya dari suku apa?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q2" value="a">
+                <span class="option-text">A. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="b">
+                <span class="option-text">B. Suku Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="c">
+                <span class="option-text">C. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q2" value="d">
+                <span class="option-text">D. Suku Madura</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 3 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">3</span>
+              Instrument musik tradisional mana yang berasal dari Sumatera Utara?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q3" value="a">
+                <span class="option-text">A. Angklung</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="b">
+                <span class="option-text">B. Gordang Sambilan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="c">
+                <span class="option-text">C. Gamelan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q3" value="d">
+                <span class="option-text">D. Sasando</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 4 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">4</span>
+              Rumah adat "Honai" berasal dari suku mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q4" value="a">
+                <span class="option-text">A. Suku Dayak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q4" value="b">
+                <span class="option-text">B. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q4" value="c">
+                <span class="option-text">C. Suku Dani</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q4" value="d">
+                <span class="option-text">D. Suku Baduy</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 5 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">5</span>
+              Pakaian adat "Kebaya" adalah tradisi dari suku apa?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q5" value="a">
+                <span class="option-text">A. Suku Sunda</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q5" value="b">
+                <span class="option-text">B. Suku Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q5" value="c">
+                <span class="option-text">C. Suku Banjar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q5" value="d">
+                <span class="option-text">D. Semua Jawaban Benar</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 2: Suku-Suku Indonesia -->
+      <form class="quiz-section" id="quizForm2">
+        <h2>Suku-Suku Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 6 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">6</span>
+              Suku apa yang terkenal dengan tradisi "Tau Tau" (patung kayu)?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q6" value="a">
+                <span class="option-text">A. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="b">
+                <span class="option-text">B. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="c">
+                <span class="option-text">C. Suku Dayak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="d">
+                <span class="option-text">D. Suku Bugis</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 7 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">7</span>
+              Suku mana yang mayoritas mendiami Pulau Sulawesi?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q7" value="a">
+                <span class="option-text">A. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="b">
+                <span class="option-text">B. Suku Bugis dan Makassar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="d">
+                <span class="option-text">D. Suku Sunda</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 8 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">8</span>
+              Suku Baduy dikenal dengan tradisi hidup sederhana dan tinggal di mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q8" value="a">
+                <span class="option-text">A. Pegunungan Bandung, Jawa Barat</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="b">
+                <span class="option-text">B. Hutan Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="c">
+                <span class="option-text">C. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="d">
+                <span class="option-text">D. Pesisir Aceh</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 9 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">9</span>
+              Berapa jumlah provinsi utama yang ada di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q9" value="a">
+                <span class="option-text">A. 30 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="b">
+                <span class="option-text">B. 33 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="c">
+                <span class="option-text">C. 34 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="d">
+                <span class="option-text">D. 37 Provinsi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 10 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">10</span>
+              Suku apa yang dikenal sebagai "pedagang laut" dan menyebar ke berbagai daerah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q10" value="a">
+                <span class="option-text">A. Suku Bugis</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="b">
+                <span class="option-text">B. Suku Banjarese</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="d">
+                <span class="option-text">D. Suku Batak</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 3: Geografi Indonesia -->
+      <form class="quiz-section" id="quizForm3">
+        <h2>Geografi Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 11 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">11</span>
+              Pulau apa yang merupakan pulau terbesar di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q11" value="a">
+                <span class="option-text">A. Pulau Sumatera</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="b">
+                <span class="option-text">B. Pulau Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="c">
+                <span class="option-text">C. Pulau Papua</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="d">
+                <span class="option-text">D. Pulau Jawa</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 12 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">12</span>
+              Berapa banyak pulau yang membentuk Kepulauan Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q12" value="a">
+                <span class="option-text">A. Sekitar 3.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="b">
+                <span class="option-text">B. Sekitar 6.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="c">
+                <span class="option-text">C. Sekitar 10.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="d">
+                <span class="option-text">D. Sekitar 17.000 pulau</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 13 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">13</span>
+              Gunung berapi tertinggi di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q13" value="a">
+                <span class="option-text">A. Gunung Merapi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="b">
+                <span class="option-text">B. Gunung Kerinci</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="c">
+                <span class="option-text">C. Gunung Semeru</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="d">
+                <span class="option-text">D. Gunung Puncak Jaya</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 14 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">14</span>
+              Danau terbesar di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q14" value="a">
+                <span class="option-text">A. Danau Toba</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="b">
+                <span class="option-text">B. Danau Bangli</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="c">
+                <span class="option-text">C. Danau Poso</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="d">
+                <span class="option-text">D. Danau Singkarak</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 15 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">15</span>
+              Pulau apa yang dikenal sebagai "Kepulauan Seribu"?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q15" value="a">
+                <span class="option-text">A. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="b">
+                <span class="option-text">B. Kepulauan Sunda Besar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="c">
+                <span class="option-text">C. Kepulauan Seribu (Jakarta)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="d">
+                <span class="option-text">D. Kepulauan Karimun Jawa</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 2: Suku-Suku Indonesia -->
+      <form class="quiz-section" id="quizForm2">
+        <h2>Suku-Suku Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 6 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">6</span>
+              Suku apa yang terkenal dengan tradisi "Tau Tau" (patung kayu)?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q6" value="a">
+                <span class="option-text">A. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="b">
+                <span class="option-text">B. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="c">
+                <span class="option-text">C. Suku Dayak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="d">
+                <span class="option-text">D. Suku Bugis</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 7 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">7</span>
+              Suku mana yang mayoritas mendiami Pulau Sulawesi?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q7" value="a">
+                <span class="option-text">A. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="b">
+                <span class="option-text">B. Suku Bugis dan Makassar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="d">
+                <span class="option-text">D. Suku Sunda</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 8 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">8</span>
+              Suku Baduy dikenal dengan tradisi hidup sederhana dan tinggal di mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q8" value="a">
+                <span class="option-text">A. Pegunungan Bandung, Jawa Barat</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="b">
+                <span class="option-text">B. Hutan Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="c">
+                <span class="option-text">C. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="d">
+                <span class="option-text">D. Pesisir Aceh</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 9 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">9</span>
+              Berapa jumlah provinsi utama yang ada di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q9" value="a">
+                <span class="option-text">A. 30 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="b">
+                <span class="option-text">B. 33 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="c">
+                <span class="option-text">C. 34 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="d">
+                <span class="option-text">D. 37 Provinsi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 10 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">10</span>
+              Suku apa yang dikenal sebagai "pedagang laut" dan menyebar ke berbagai daerah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q10" value="a">
+                <span class="option-text">A. Suku Bugis</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="b">
+                <span class="option-text">B. Suku Banjarese</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="d">
+                <span class="option-text">D. Suku Batak</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 3: Geografi Indonesia -->
+      <form class="quiz-section" id="quizForm3">
+        <h2>Geografi Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 11 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">11</span>
+              Pulau apa yang merupakan pulau terbesar di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q11" value="a">
+                <span class="option-text">A. Pulau Sumatera</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="b">
+                <span class="option-text">B. Pulau Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="c">
+                <span class="option-text">C. Pulau Papua</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="d">
+                <span class="option-text">D. Pulau Jawa</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 12 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">12</span>
+              Berapa banyak pulau yang membentuk Kepulauan Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q12" value="a">
+                <span class="option-text">A. Sekitar 3.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="b">
+                <span class="option-text">B. Sekitar 6.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="c">
+                <span class="option-text">C. Sekitar 10.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="d">
+                <span class="option-text">D. Sekitar 17.000 pulau</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 13 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">13</span>
+              Gunung berapi tertinggi di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q13" value="a">
+                <span class="option-text">A. Gunung Merapi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="b">
+                <span class="option-text">B. Gunung Kerinci</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="c">
+                <span class="option-text">C. Gunung Semeru</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="d">
+                <span class="option-text">D. Gunung Puncak Jaya</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 14 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">14</span>
+              Danau terbesar di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q14" value="a">
+                <span class="option-text">A. Danau Toba</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="b">
+                <span class="option-text">B. Danau Bangli</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="c">
+                <span class="option-text">C. Danau Poso</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="d">
+                <span class="option-text">D. Danau Singkarak</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 15 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">15</span>
+              Pulau apa yang dikenal sebagai "Kepulauan Seribu"?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q15" value="a">
+                <span class="option-text">A. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="b">
+                <span class="option-text">B. Kepulauan Sunda Besar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="c">
+                <span class="option-text">C. Kepulauan Seribu (Jakarta)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="d">
+                <span class="option-text">D. Kepulauan Karimun Jawa</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 2: Suku-Suku Indonesia -->
+      <form class="quiz-section" id="quizForm2">
+        <h2>Suku-Suku Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 6 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">6</span>
+              Suku apa yang terkenal dengan tradisi "Tau Tau" (patung kayu)?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q6" value="a">
+                <span class="option-text">A. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="b">
+                <span class="option-text">B. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="c">
+                <span class="option-text">C. Suku Dayak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="d">
+                <span class="option-text">D. Suku Bugis</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 7 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">7</span>
+              Suku mana yang mayoritas mendiami Pulau Sulawesi?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q7" value="a">
+                <span class="option-text">A. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="b">
+                <span class="option-text">B. Suku Bugis dan Makassar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="d">
+                <span class="option-text">D. Suku Sunda</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 8 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">8</span>
+              Suku Baduy dikenal dengan tradisi hidup sederhana dan tinggal di mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q8" value="a">
+                <span class="option-text">A. Pegunungan Bandung, Jawa Barat</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="b">
+                <span class="option-text">B. Hutan Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="c">
+                <span class="option-text">C. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="d">
+                <span class="option-text">D. Pesisir Aceh</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 9 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">9</span>
+              Berapa jumlah provinsi utama yang ada di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q9" value="a">
+                <span class="option-text">A. 30 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="b">
+                <span class="option-text">B. 33 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="c">
+                <span class="option-text">C. 34 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="d">
+                <span class="option-text">D. 37 Provinsi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 10 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">10</span>
+              Suku apa yang dikenal sebagai "pedagang laut" dan menyebar ke berbagai daerah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q10" value="a">
+                <span class="option-text">A. Suku Bugis</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="b">
+                <span class="option-text">B. Suku Banjarese</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="d">
+                <span class="option-text">D. Suku Batak</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 3: Geografi Indonesia -->
+      <form class="quiz-section" id="quizForm3">
+        <h2>Geografi Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 11 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">11</span>
+              Pulau apa yang merupakan pulau terbesar di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q11" value="a">
+                <span class="option-text">A. Pulau Sumatera</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="b">
+                <span class="option-text">B. Pulau Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="c">
+                <span class="option-text">C. Pulau Papua</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="d">
+                <span class="option-text">D. Pulau Jawa</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 12 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">12</span>
+              Berapa banyak pulau yang membentuk Kepulauan Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q12" value="a">
+                <span class="option-text">A. Sekitar 3.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="b">
+                <span class="option-text">B. Sekitar 6.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="c">
+                <span class="option-text">C. Sekitar 10.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="d">
+                <span class="option-text">D. Sekitar 17.000 pulau</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 13 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">13</span>
+              Gunung berapi tertinggi di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q13" value="a">
+                <span class="option-text">A. Gunung Merapi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="b">
+                <span class="option-text">B. Gunung Kerinci</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="c">
+                <span class="option-text">C. Gunung Semeru</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="d">
+                <span class="option-text">D. Gunung Puncak Jaya</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 14 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">14</span>
+              Danau terbesar di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q14" value="a">
+                <span class="option-text">A. Danau Toba</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="b">
+                <span class="option-text">B. Danau Bangli</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="c">
+                <span class="option-text">C. Danau Poso</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="d">
+                <span class="option-text">D. Danau Singkarak</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 15 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">15</span>
+              Pulau apa yang dikenal sebagai "Kepulauan Seribu"?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q15" value="a">
+                <span class="option-text">A. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="b">
+                <span class="option-text">B. Kepulauan Sunda Besar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="c">
+                <span class="option-text">C. Kepulauan Seribu (Jakarta)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="d">
+                <span class="option-text">D. Kepulauan Karimun Jawa</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 2: Suku-Suku Indonesia -->
+      <form class="quiz-section" id="quizForm2">
+        <h2>Suku-Suku Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 6 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">6</span>
+              Suku apa yang terkenal dengan tradisi "Tau Tau" (patung kayu)?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q6" value="a">
+                <span class="option-text">A. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="b">
+                <span class="option-text">B. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="c">
+                <span class="option-text">C. Suku Dayak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q6" value="d">
+                <span class="option-text">D. Suku Bugis</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 7 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">7</span>
+              Suku mana yang mayoritas mendiami Pulau Sulawesi?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q7" value="a">
+                <span class="option-text">A. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="b">
+                <span class="option-text">B. Suku Bugis dan Makassar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q7" value="d">
+                <span class="option-text">D. Suku Sunda</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 8 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">8</span>
+              Suku Baduy dikenal dengan tradisi hidup sederhana dan tinggal di mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q8" value="a">
+                <span class="option-text">A. Pegunungan Bandung, Jawa Barat</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="b">
+                <span class="option-text">B. Hutan Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="c">
+                <span class="option-text">C. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q8" value="d">
+                <span class="option-text">D. Pesisir Aceh</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 9 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">9</span>
+              Berapa jumlah provinsi utama yang ada di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q9" value="a">
+                <span class="option-text">A. 30 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="b">
+                <span class="option-text">B. 33 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="c">
+                <span class="option-text">C. 34 Provinsi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q9" value="d">
+                <span class="option-text">D. 37 Provinsi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 10 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">10</span>
+              Suku apa yang dikenal sebagai "pedagang laut" dan menyebar ke berbagai daerah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q10" value="a">
+                <span class="option-text">A. Suku Bugis</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="b">
+                <span class="option-text">B. Suku Banjarese</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="c">
+                <span class="option-text">C. Suku Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q10" value="d">
+                <span class="option-text">D. Suku Batak</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 3: Geografi Indonesia -->
+      <form class="quiz-section" id="quizForm3">
+        <h2>Geografi Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 11 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">11</span>
+              Pulau apa yang merupakan pulau terbesar di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q11" value="a">
+                <span class="option-text">A. Pulau Sumatera</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="b">
+                <span class="option-text">B. Pulau Kalimantan</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="c">
+                <span class="option-text">C. Pulau Papua</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q11" value="d">
+                <span class="option-text">D. Pulau Jawa</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 12 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">12</span>
+              Berapa banyak pulau yang membentuk Kepulauan Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q12" value="a">
+                <span class="option-text">A. Sekitar 3.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="b">
+                <span class="option-text">B. Sekitar 6.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="c">
+                <span class="option-text">C. Sekitar 10.000 pulau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q12" value="d">
+                <span class="option-text">D. Sekitar 17.000 pulau</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 13 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">13</span>
+              Gunung berapi tertinggi di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q13" value="a">
+                <span class="option-text">A. Gunung Merapi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="b">
+                <span class="option-text">B. Gunung Kerinci</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="c">
+                <span class="option-text">C. Gunung Semeru</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q13" value="d">
+                <span class="option-text">D. Gunung Puncak Jaya</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 14 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">14</span>
+              Danau terbesar di Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q14" value="a">
+                <span class="option-text">A. Danau Toba</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="b">
+                <span class="option-text">B. Danau Bangli</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="c">
+                <span class="option-text">C. Danau Poso</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q14" value="d">
+                <span class="option-text">D. Danau Singkarak</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 15 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">15</span>
+              Pulau apa yang dikenal sebagai "Kepulauan Seribu"?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q15" value="a">
+                <span class="option-text">A. Kepulauan Riau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="b">
+                <span class="option-text">B. Kepulauan Sunda Besar</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="c">
+                <span class="option-text">C. Kepulauan Seribu (Jakarta)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q15" value="d">
+                <span class="option-text">D. Kepulauan Karimun Jawa</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 4: Bahasa Indonesia -->
+      <form class="quiz-section" id="quizForm4">
+        <h2>Bahasa-Bahasa Daerah Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 16 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">16</span>
+              Bahasa daerah mana yang paling banyak penutur setelah Bahasa Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q16" value="a">
+                <span class="option-text">A. Bahasa Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q16" value="b">
+                <span class="option-text">B. Bahasa Sunda</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q16" value="c">
+                <span class="option-text">C. Bahasa Madura</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q16" value="d">
+                <span class="option-text">D. Bahasa Minangkabau</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 17 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">17</span>
+              Aksara kuno apa yang digunakan oleh Suku Batak untuk menulis?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q17" value="a">
+                <span class="option-text">A. Aksara Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q17" value="b">
+                <span class="option-text">B. Aksara Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q17" value="c">
+                <span class="option-text">C. Aksara Sunda</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q17" value="d">
+                <span class="option-text">D. Aksara Bali</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 18 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">18</span>
+              Berapa banyak bahasa daerah yang ada di Indonesia?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q18" value="a">
+                <span class="option-text">A. Sekitar 100 bahasa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q18" value="b">
+                <span class="option-text">B. Sekitar 300 bahasa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q18" value="c">
+                <span class="option-text">C. Sekitar 700 bahasa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q18" value="d">
+                <span class="option-text">D. Lebih dari 1.000 bahasa</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 19 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">19</span>
+              Aksara Jawa tradisional disebut dengan nama apa?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q19" value="a">
+                <span class="option-text">A. Aksara Hanacaraka</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q19" value="b">
+                <span class="option-text">B. Aksara Pallava</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q19" value="c">
+                <span class="option-text">C. Aksara Brahmi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q19" value="d">
+                <span class="option-text">D. Aksara Kawi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 20 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">20</span>
+              Bahasa daerah mana yang merupakan bahasa resmi di provinsi Aceh?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q20" value="a">
+                <span class="option-text">A. Bahasa Gayo</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q20" value="b">
+                <span class="option-text">B. Bahasa Aceh</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q20" value="c">
+                <span class="option-text">C. Bahasa Alas</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q20" value="d">
+                <span class="option-text">D. Bahasa Ulu</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 5: Kuliner Indonesia -->
+      <form class="quiz-section" id="quizForm5">
+        <h2>Kuliner & Tradisi Makan Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 21 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">21</span>
+              Makanan tradisional "Rendang" berasal dari suku mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q21" value="a">
+                <span class="option-text">A. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q21" value="b">
+                <span class="option-text">B. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q21" value="c">
+                <span class="option-text">C. Suku Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q21" value="d">
+                <span class="option-text">D. Suku Banjar</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 22 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">22</span>
+              "Soto Ayam" adalah makanan tradisional yang berasal dari daerah mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q22" value="a">
+                <span class="option-text">A. Betawi (Jakarta)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q22" value="b">
+                <span class="option-text">B. Jawa Tengah dan Jawa Timur</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q22" value="c">
+                <span class="option-text">C. Sumatra Utara</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q22" value="d">
+                <span class="option-text">D. Semua jawaban benar</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 23 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">23</span>
+              Kue tradisional "Lemper" berasal dari budaya mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q23" value="a">
+                <span class="option-text">A. Budaya Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q23" value="b">
+                <span class="option-text">B. Budaya Sunda</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q23" value="c">
+                <span class="option-text">C. Budaya Betawi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q23" value="d">
+                <span class="option-text">D. Budaya Aceh</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 24 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">24</span>
+              "Gado-gado" adalah makanan tradisional dari suku apa?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q24" value="a">
+                <span class="option-text">A. Suku Betawi</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q24" value="b">
+                <span class="option-text">B. Suku Sunda</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q24" value="c">
+                <span class="option-text">C. Suku Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q24" value="d">
+                <span class="option-text">D. Suku Minangkabau</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 25 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">25</span>
+              Minuman tradisional "Jamu" berasal dari budaya mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q25" value="a">
+                <span class="option-text">A. Budaya Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q25" value="b">
+                <span class="option-text">B. Budaya Sunda</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q25" value="c">
+                <span class="option-text">C. Budaya Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q25" value="d">
+                <span class="option-text">D. Budaya Betawi</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 6: Kesenian & Seni Pertunjukan -->
+      <form class="quiz-section" id="quizForm6">
+        <h2>Kesenian & Seni Pertunjukan Indonesia</h2>
+        <div class="quiz-questions">
+          <!-- Question 26 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">26</span>
+              Wayang Kulit adalah seni pertunjukan tradisional dari daerah mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q26" value="a">
+                <span class="option-text">A. Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q26" value="b">
+                <span class="option-text">B. Bali</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q26" value="c">
+                <span class="option-text">C. Sumatra</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q26" value="d">
+                <span class="option-text">D. Sulawesi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 27 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">27</span>
+              "Reog Ponorogo" adalah kesenian tradisional dari provinsi mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q27" value="a">
+                <span class="option-text">A. Jawa Tengah</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q27" value="b">
+                <span class="option-text">B. Jawa Timur</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q27" value="c">
+                <span class="option-text">C. Jawa Barat</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q27" value="d">
+                <span class="option-text">D. DIY Yogyakarta</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 28 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">28</span>
+              Seni pertunjukan "Kecak" adalah tradisi dari mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q28" value="a">
+                <span class="option-text">A. Bali</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q28" value="b">
+                <span class="option-text">B. Lombok</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q28" value="c">
+                <span class="option-text">C. Flores</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q28" value="d">
+                <span class="option-text">D. Sumba</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 29 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">29</span>
+              "Pencak Silat" adalah seni bela diri tradisional yang berasal dari wilayah mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q29" value="a">
+                <span class="option-text">A. Asia Tenggara (Melayu)</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q29" value="b">
+                <span class="option-text">B. Jawa saja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q29" value="c">
+                <span class="option-text">C. Sumatra saja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q29" value="d">
+                <span class="option-text">D. Aceh saja</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 30 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">30</span>
+              "Ketoprak" adalah seni pertunjukan tradisional dari mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q30" value="a">
+                <span class="option-text">A. Jawa Tengah</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q30" value="b">
+                <span class="option-text">B. Jawa Timur</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q30" value="c">
+                <span class="option-text">C. Jawa Barat</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q30" value="d">
+                <span class="option-text">D. Madura</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 7: Adat Istiadat & Upacara -->
+      <form class="quiz-section" id="quizForm7">
+        <h2>Adat Istiadat & Upacara Tradisional</h2>
+        <div class="quiz-questions">
+          <!-- Question 31 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">31</span>
+              Upacara "Rambu Solo" adalah tradisi kematian dari suku mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q31" value="a">
+                <span class="option-text">A. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q31" value="b">
+                <span class="option-text">B. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q31" value="c">
+                <span class="option-text">C. Suku Dayak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q31" value="d">
+                <span class="option-text">D. Suku Minangkabau</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 32 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">32</span>
+              "Nyepi" adalah perayaan tahun baru tradisional dari mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q32" value="a">
+                <span class="option-text">A. Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q32" value="b">
+                <span class="option-text">B. Bali</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q32" value="c">
+                <span class="option-text">C. Sumatra</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q32" value="d">
+                <span class="option-text">D. Sulawesi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 33 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">33</span>
+              Sistem kekerabatan "Matrilineal" (garis keturunan ibu) diterapkan oleh suku mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q33" value="a">
+                <span class="option-text">A. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q33" value="b">
+                <span class="option-text">B. Suku Jawa</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q33" value="c">
+                <span class="option-text">C. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q33" value="d">
+                <span class="option-text">D. Suku Bugis</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 34 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">34</span>
+              Upacara "Kematian Beranak" adalah tradisi dari suku apa?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q34" value="a">
+                <span class="option-text">A. Suku Dayak Kanayatn</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q34" value="b">
+                <span class="option-text">B. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q34" value="c">
+                <span class="option-text">C. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q34" value="d">
+                <span class="option-text">D. Suku Aceh</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Question 35 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">35</span>
+              Rumah adat "Tongkonan" adalah milik suku mana?
+            </div>
+            <div class="options">
+              <label class="option-label">
+                <input type="radio" name="q35" value="a">
+                <span class="option-text">A. Suku Minangkabau</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q35" value="b">
+                <span class="option-text">B. Suku Toraja</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q35" value="c">
+                <span class="option-text">C. Suku Batak</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="q35" value="d">
+                <span class="option-text">D. Suku Dayak</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Section 8: Lingkungan, Sejarah & Simbol Nasional (36-50) -->
+      <form class="quiz-section" id="quizForm8">
+        <h2>Lingkungan, Sejarah & Simbol Nasional</h2>
+        <div class="quiz-questions">
+          <!-- Question 36 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">36</span>
+              Komodo National Park terletak di pulau mana?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q36" value="a"><span class="option-text">A. Flores</span></label>
+              <label class="option-label"><input type="radio" name="q36" value="b"><span class="option-text">B. Sulawesi</span></label>
+              <label class="option-label"><input type="radio" name="q36" value="c"><span class="option-text">C. Sumatera</span></label>
+              <label class="option-label"><input type="radio" name="q36" value="d"><span class="option-text">D. Kalimantan</span></label>
+            </div>
+          </div>
+
+          <!-- Question 37 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">37</span>
+              Hutan hujan tropis terbesar di Indonesia banyak terdapat di pulau?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q37" value="a"><span class="option-text">A. Jawa</span></label>
+              <label class="option-label"><input type="radio" name="q37" value="b"><span class="option-text">B. Kalimantan</span></label>
+              <label class="option-label"><input type="radio" name="q37" value="c"><span class="option-text">C. Bali</span></label>
+              <label class="option-label"><input type="radio" name="q37" value="d"><span class="option-text">D. Sulawesi</span></label>
+            </div>
+          </div>
+
+          <!-- Question 38 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">38</span>
+              Kepulauan Raja Ampat berada di provinsi?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q38" value="a"><span class="option-text">A. Maluku</span></label>
+              <label class="option-label"><input type="radio" name="q38" value="b"><span class="option-text">B. Papua</span></label>
+              <label class="option-label"><input type="radio" name="q38" value="c"><span class="option-text">C. Papua Barat</span></label>
+              <label class="option-label"><input type="radio" name="q38" value="d"><span class="option-text">D. NTT</span></label>
+            </div>
+          </div>
+
+          <!-- Question 39 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">39</span>
+              Siapa yang membacakan teks Proklamasi Kemerdekaan RI pada 17 Agustus 1945?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q39" value="a"><span class="option-text">A. Ir. Soekarno</span></label>
+              <label class="option-label"><input type="radio" name="q39" value="b"><span class="option-text">B. Mohammad Hatta</span></label>
+              <label class="option-label"><input type="radio" name="q39" value="c"><span class="option-text">C. Sutan Sjahrir</span></label>
+              <label class="option-label"><input type="radio" name="q39" value="d"><span class="option-text">D. Ki Hajar Dewantara</span></label>
+            </div>
+          </div>
+
+          <!-- Question 40 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">40</span>
+              Tahun Proklamasi Kemerdekaan Indonesia adalah?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q40" value="a"><span class="option-text">A. 1945</span></label>
+              <label class="option-label"><input type="radio" name="q40" value="b"><span class="option-text">B. 1950</span></label>
+              <label class="option-label"><input type="radio" name="q40" value="c"><span class="option-text">C. 1949</span></label>
+              <label class="option-label"><input type="radio" name="q40" value="d"><span class="option-text">D. 1935</span></label>
+            </div>
+          </div>
+
+          <!-- Question 41 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">41</span>
+              Semboyan negara yang tertulis pada lambang Garuda adalah?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q41" value="a"><span class="option-text">A. Bhineka Merah Putih</span></label>
+              <label class="option-label"><input type="radio" name="q41" value="b"><span class="option-text">B. Bhinneka Tunggal Ika</span></label>
+              <label class="option-label"><input type="radio" name="q41" value="c"><span class="option-text">C. Satu Nusa Satu Bangsa</span></label>
+              <label class="option-label"><input type="radio" name="q41" value="d"><span class="option-text">D. Merdeka Selamanya</span></label>
+            </div>
+          </div>
+
+          <!-- Question 42 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">42</span>
+              Letak gunung Krakatau berada di antara pulau?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q42" value="a"><span class="option-text">A. Sulawesi & Bali</span></label>
+              <label class="option-label"><input type="radio" name="q42" value="b"><span class="option-text">B. Kalimantan & Sulawesi</span></label>
+              <label class="option-label"><input type="radio" name="q42" value="c"><span class="option-text">C. Jawa & Sumatera</span></label>
+              <label class="option-label"><input type="radio" name="q42" value="d"><span class="option-text">D. Nusa Tenggara</span></label>
+            </div>
+          </div>
+
+          <!-- Question 43 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">43</span>
+              Alat musik "Sasando" berasal dari pulau?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q43" value="a"><span class="option-text">A. Lombok</span></label>
+              <label class="option-label"><input type="radio" name="q43" value="b"><span class="option-text">B. Rote (NTT)</span></label>
+              <label class="option-label"><input type="radio" name="q43" value="c"><span class="option-text">C. Sulawesi</span></label>
+              <label class="option-label"><input type="radio" name="q43" value="d"><span class="option-text">D. Bali</span></label>
+            </div>
+          </div>
+
+          <!-- Question 44 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">44</span>
+              Ibu kota provinsi Aceh adalah?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q44" value="a"><span class="option-text">A. Banda Aceh</span></label>
+              <label class="option-label"><input type="radio" name="q44" value="b"><span class="option-text">B. Medan</span></label>
+              <label class="option-label"><input type="radio" name="q44" value="c"><span class="option-text">C. Langsa</span></label>
+              <label class="option-label"><input type="radio" name="q44" value="d"><span class="option-text">D. Lhokseumawe</span></label>
+            </div>
+          </div>
+
+          <!-- Question 45 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">45</span>
+              Danau Toba terletak di pulau mana?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q45" value="a"><span class="option-text">A. Kalimantan</span></label>
+              <label class="option-label"><input type="radio" name="q45" value="b"><span class="option-text">B. Sulawesi</span></label>
+              <label class="option-label"><input type="radio" name="q45" value="c"><span class="option-text">C. Sumatera</span></label>
+              <label class="option-label"><input type="radio" name="q45" value="d"><span class="option-text">D. Papua</span></label>
+            </div>
+          </div>
+
+          <!-- Question 46 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">46</span>
+              Tenun ikat tradisional terkenal berasal dari daerah?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q46" value="a"><span class="option-text">A. Aceh</span></label>
+              <label class="option-label"><input type="radio" name="q46" value="b"><span class="option-text">B. Kalimantan</span></label>
+              <label class="option-label"><input type="radio" name="q46" value="c"><span class="option-text">C. Sumatera Barat</span></label>
+              <label class="option-label"><input type="radio" name="q46" value="d"><span class="option-text">D. Sumba (NTT)</span></label>
+            </div>
+          </div>
+
+          <!-- Question 47 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">47</span>
+              Alat musik bambu "Angklung" berasal dari daerah?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q47" value="a"><span class="option-text">A. Sunda (Jawa Barat)</span></label>
+              <label class="option-label"><input type="radio" name="q47" value="b"><span class="option-text">B. Bali</span></label>
+              <label class="option-label"><input type="radio" name="q47" value="c"><span class="option-text">C. Aceh</span></label>
+              <label class="option-label"><input type="radio" name="q47" value="d"><span class="option-text">D. Papua</span></label>
+            </div>
+          </div>
+
+          <!-- Question 48 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">48</span>
+              Tarian Saman berasal dari provinsi?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q48" value="a"><span class="option-text">A. Sumatera Utara</span></label>
+              <label class="option-label"><input type="radio" name="q48" value="b"><span class="option-text">B. Aceh</span></label>
+              <label class="option-label"><input type="radio" name="q48" value="c"><span class="option-text">C. Riau</span></label>
+              <label class="option-label"><input type="radio" name="q48" value="d"><span class="option-text">D. Bengkulu</span></label>
+            </div>
+          </div>
+
+          <!-- Question 49 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">49</span>
+              Rumah adat Minangkabau dikenal dengan nama?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q49" value="a"><span class="option-text">A. Rumah Limas</span></label>
+              <label class="option-label"><input type="radio" name="q49" value="b"><span class="option-text">B. Rumah Adat Tongkonan</span></label>
+              <label class="option-label"><input type="radio" name="q49" value="c"><span class="option-text">C. Rumah Gadang</span></label>
+              <label class="option-label"><input type="radio" name="q49" value="d"><span class="option-text">D. Rumah Honai</span></label>
+            </div>
+          </div>
+
+          <!-- Question 50 -->
+          <div class="question-item">
+            <div class="question-text">
+              <span class="question-number">50</span>
+              Provinsi terbesar di Indonesia berdasarkan luas wilayah saat ini adalah?
+            </div>
+            <div class="options">
+              <label class="option-label"><input type="radio" name="q50" value="a"><span class="option-text">A. Kalimantan Barat</span></label>
+              <label class="option-label"><input type="radio" name="q50" value="b"><span class="option-text">B. Kalimantan Timur</span></label>
+              <label class="option-label"><input type="radio" name="q50" value="c"><span class="option-text">C. Kalimantan Tengah</span></label>
+              <label class="option-label"><input type="radio" name="q50" value="d"><span class="option-text">D. Papua</span></label>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Quiz Actions -->
+      <div class="quiz-actions">
+        <button type="button" class="btn btn-primary" id="submitBtn">Kirim Jawaban</button>
+        <button type="button" class="btn btn-secondary" id="resetBtn">Reset</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Results Modal -->
+  <div class="results-modal" id="resultsModal">
+    <div class="results-content">
+      <h2>Hasil Quiz Anda</h2>
+      <div class="score-display" id="scoreDisplay">0/50</div>
+      <div class="results-message" id="resultsMessage"></div>
+      <div class="results-actions">
+        <button type="button" class="btn btn-primary" id="retryBtn">Coba Lagi</button>
+        <button type="button" class="btn btn-secondary" id="homeBtn">Kembali ke Beranda</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Search functionality
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    searchBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isActive = searchInput.classList.toggle('active');
+      if (isActive) {
+        searchInput.focus();
+      } else {
+        searchInput.blur();
+      }
+    });
+
+    searchInput.addEventListener('blur', () => {
+      if (searchInput.value.trim() === '') {
+        searchInput.classList.remove('active');
+      }
+    });
+
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        console.log('Cari:', searchInput.value);
+      } else if (e.key === 'Escape') {
+        searchInput.classList.remove('active');
+        searchInput.blur();
+      }
+    });
+
+    // Quiz Logic (extended to 50 soal)
+    const correctAnswers = {
+      q1: 'a',  // Tari Pendet
+      q2: 'b',  // Suku Jawa
+      q3: 'b',  // Gordang Sambilan
+      q4: 'c',  // Suku Dani
+      q5: 'd',  // Semua Jawaban Benar
+      q6: 'a',  // Suku Toraja
+      q7: 'b',  // Suku Bugis dan Makassar
+      q8: 'a',  // Pegunungan Bandung
+      q9: 'c',  // 34 Provinsi
+      q10: 'a', // Suku Bugis
+      q11: 'b', // Pulau Kalimantan
+      q12: 'd', // 17.000 pulau
+      q13: 'b', // Gunung Kerinci
+      q14: 'a', // Danau Toba
+      q15: 'c',  // Kepulauan Seribu
+      q16: 'a', // Bahasa Jawa
+      q17: 'a', // Aksara Batak
+      q18: 'd', // Lebih dari 1.000 bahasa
+      q19: 'a', // Aksara Hanacaraka
+      q20: 'b', // Bahasa Aceh
+      q21: 'a', // Suku Minangkabau
+      q22: 'd', // Semua jawaban benar
+      q23: 'a', // Budaya Jawa
+      q24: 'a', // Suku Betawi
+      q25: 'a', // Budaya Jawa
+      q26: 'a', // Jawa
+      q27: 'b', // Jawa Timur
+      q28: 'a', // Bali
+      q29: 'a', // Asia Tenggara (Melayu)
+      q30: 'a', // Jawa Tengah
+      q31: 'b', // Suku Toraja
+      q32: 'b', // Bali
+      q33: 'a', // Suku Minangkabau
+      q34: 'a', // Suku Dayak Kanayatn
+      q35: 'b', // Suku Toraja
+      q36: 'a', // Flores (Komodo)
+      q37: 'b', // Kalimantan (hutan hujan)
+      q38: 'c', // Papua Barat (Raja Ampat)
+      q39: 'a', // Soekarno
+      q40: 'a', // 1945
+      q41: 'b', // Bhinneka Tunggal Ika
+      q42: 'c', // Jawa & Sumatera (Krakatau)
+      q43: 'b', // Rote (Sasando)
+      q44: 'a', // Banda Aceh
+      q45: 'c', // Sumatera (Danau Toba)
+      q46: 'd', // Sumba (tenun ikat)
+      q47: 'a', // Sunda (Angklung)
+      q48: 'b', // Aceh (Saman)
+      q49: 'c', // Rumah Gadang
+      q50: 'd'  // Papua (provinsi terbesar)
+    };
+
+    // Quiz navigation functionality
+    document.querySelectorAll('.quiz-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        const section = document.getElementById(target);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    const resultMessages = {
+      excellent: "🎉 Luar Biasa! Anda adalah ahli budaya Indonesia!",
+      great: "👏 Sangat Bagus! Pengetahuan Anda tentang Indonesia sudah mendalam.",
+      good: "😊 Bagus! Anda memiliki pemahaman yang cukup baik.",
+      fair: "📚 Cukup! Terus pelajari lebih lanjut tentang keberagaman Indonesia.",
+      needs_improvement: "💪 Jangan menyerah! Pelajari lebih lanjut tentang budaya Indonesia."
+    };
+
+    function getResultMessage(score) {
+      const percentage = (score / 50) * 100;
+      if (percentage === 100) return resultMessages.excellent;
+      if (percentage >= 80) return resultMessages.great;
+      if (percentage >= 60) return resultMessages.good;
+      if (percentage >= 40) return resultMessages.fair;
+      return resultMessages.needs_improvement;
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      let score = 0;
+      for (let i = 1; i <= 50; i++) {
+        const questionName = 'q' + i;
+        const selectedAnswer = document.querySelector(`input[name="${questionName}"]:checked`);
+        if (selectedAnswer && selectedAnswer.value === correctAnswers[questionName]) {
+          score++;
+        }
+      }
+
+      document.getElementById('scoreDisplay').textContent = `${score}/50`;
+      document.getElementById('resultsMessage').textContent = getResultMessage(score);
+      document.getElementById('resultsModal').classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      document.getElementById('quizForm').reset();
+      document.getElementById('quizForm2').reset();
+      document.getElementById('quizForm3').reset();
+      document.getElementById('quizForm4').reset();
+      document.getElementById('quizForm5').reset();
+      document.getElementById('quizForm6').reset();
+      document.getElementById('quizForm7').reset();
+      document.getElementById('quizForm8').reset();
+      window.scrollTo(0, 0);
+    });
+
+    document.getElementById('retryBtn').addEventListener('click', () => {
+      document.getElementById('quizForm').reset();
+      document.getElementById('quizForm2').reset();
+      document.getElementById('quizForm3').reset();
+      document.getElementById('quizForm4').reset();
+      document.getElementById('quizForm5').reset();
+      document.getElementById('quizForm6').reset();
+      document.getElementById('quizForm7').reset();
+      document.getElementById('quizForm8').reset();
+      document.getElementById('resultsModal').classList.remove('visible');
+      document.body.style.overflow = '';
+      window.scrollTo(0, 0);
+    });
+
+    document.getElementById('homeBtn').addEventListener('click', () => {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>
